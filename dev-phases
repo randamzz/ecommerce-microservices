@@ -1,0 +1,73 @@
+commande pour exc mon projet spring : .\mvnw.cmd spring-boot:run
+Project Archi:
+                         ┌─────────────────┐
+                         │     Client      │
+                         └────────┬────────┘
+                                  │
+                                  ▼
+                         ┌─────────────────┐
+                         │   API Gateway   │
+                         │      :8080      │
+                         └────────┬────────┘
+                                  │
+                                  ▼
+                         ┌─────────────────┐
+                         │  Order Service  │
+                         └────────┬────────┘
+                                  │
+                             OpenFeign
+                                  │
+                                  ▼
+                         ┌─────────────────┐
+                         │ Load Balancer   │
+                         └────────┬────────┘
+                                  │
+                         ┌────────┴────────┐
+                         ▼                 ▼
+                 Inventory :8081     Inventory :8082
+                         │                 │
+                         └────────┬────────┘
+                                  │
+                               Eureka
+                                  │
+                         ┌────────┴────────┐
+                         │ Service Registry│
+                         │      :8761      │
+                         └─────────────────┘
+
+PHASE 1
+ ├── 1. Premier endpoint Inventory
+ └── 2. Controller → Service → Data
+
+PHASE 2
+ ├── 3. Créer Order Service
+ └── 4. Premier endpoint Order
+
+PHASE 3
+ ├── 5. Eureka Server
+ ├── 6. Inventory → Eureka
+ └── 7. Order → Eureka
+
+PHASE 4
+ ├── 8. OpenFeign
+ └── 9. Order → Inventory
+
+PHASE 5
+ ├── 10. Plusieurs instances Inventory
+ └── 11. Load Balancer
+
+PHASE 6
+ ├── 12. Resilience4j
+ ├── 13. États du Circuit Breaker
+ └── 14. Fallback
+
+PHASE 7
+ ├── 15. API Gateway
+ └── 16. Gateway → Eureka → Order
+
+PHASE 8
+ └── 17. Tests end-to-end
+
+PHASE 9
+ └── Scénarios de panne
+
